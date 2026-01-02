@@ -1,6 +1,6 @@
 using System;
 
-namespace BankSystem.Domin.Entities
+namespace BankSystem.Domain.Entities
 {
     public class Client
     {
@@ -12,14 +12,14 @@ namespace BankSystem.Domin.Entities
 
         public Client(int id, string fname, string lname, string phone, string email)
         {
-            if (string.IsNullOrWhiteSpace(fname)))
-                throw new Exception("Имя не может быть пустым");
+            if (string.IsNullOrWhiteSpace(fname))
+                throw new ArgumentException("Имя не может быть пустым", nameof(fname);
             if (string.IsNullOrWhiteSpace(lname))
-                throw new Exception("Фамилия не может быть пустой");
+                throw new ArgumentException("Фамилия не может быть пустой", nameof(lname);
             if (string.IsNullOrWhiteSpace(phone))
-                throw new Exception("Номер телефона обязателен")
-            if(string.IsNullOrWhiteSpace(email)))
-                throw new Exception("Почта обязательна");
+                throw new ArgumentException("Номер телефона обязателен");
+            if(string.IsNullOrWhiteSpace(email))
+                throw new ArgumentException("Почта обязательна");
             FirstName = fname;
             LastName = lname;
             Phone = phone;
@@ -29,17 +29,25 @@ namespace BankSystem.Domin.Entities
 
         public void Rename(string fname, string lname)
         {
+            if (string.IsNullOrWhiteSpace(fname))
+                throw new ArgumentException("Имя не может быть пустым", nameof(fname));
+            if (string.IsNullOrWhiteSpace(lname))
+                throw new ArgumentException("Фамилия не может быть пустой", nameof(lname));
             FirstName = fname;
             LastName = lname;
         }
 
         public void ChangePhone(string phone)
         {
+            if (string.IsNullOrWhiteSpace(phone))
+                throw new ArgumentException("Номер телефона обязателен", nameof(phone));
             Phone = phone;
         }
 
         public void ChangeEmail(string email)
         {
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentException("Почта обязательна", nameof(email));
             Email = email;
         }
     }
